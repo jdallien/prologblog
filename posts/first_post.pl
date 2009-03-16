@@ -1,7 +1,7 @@
 post([h2(class('post_title'), 'Prolog Blog launches'),
       div(class('date'), 'March 16, 2009'),
       p('Welcome to Prolog Blog, a site dedicated to Prolog news, tutorials and helping to connect the Prolog community. The site itself is written in Prolog and the source is available on GitHub. Visit the '),
-      a(href('http://github.com/jdallien/prologblog'), 'Prolog Blog GitHib repository'),
+      a(href('http://github.com/jdallien/prologblog'), 'Prolog Blog GitHub repository'),
       '. The site is very simple for now but will be undergoing constant improvement. An RSS feed is coming soon.',
       p('Feedback, links, suggestions for posts or links to your own blog posts you would like to share are welcome. Please email '),
       a(href('mailto:contact@prologblog.com'), 'contact@prologblog.com'), '.',
