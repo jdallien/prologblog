@@ -1,5 +1,58 @@
 Prolog Blog
 
-Copyright 2009 Jeff Dallien (jeff@dallien.net)
-
 See http://prologblog.com and http://jeff.dallien.net for details.
+
+Copyright (c) 2009 Jeff Dallien (jeff@dallien.net)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+Page templating system (psp_templating.pl) extracted from Prolog Server
+Pages by Benjamin Johnston.
+http://www.benjaminjohnston.com.au/template.prolog?t=psp
+
+Prolog Server Pages original license
+------------------------------------
+PSP is free for any purpose (including commercial use) and
+is provided without warranty of any kind. I grant you a
+permanent, non-exclusive, royalty-free license to use and
+modify this code (or any of its concepts) in any way you
+wish.
+
+If you do use PSP, if incorporate it into another product,
+or if it inspires you to create something similar or related,
+I ask for a completely optional favor. If you wish to do one
+(or more!) of the following - and, again, this is completely
+optional - it would by greatly appreciated:
+
+- Donate money to SWI Prolog in my name
+- Let me know how you used PSP, and provide some feedback
+- Write me a letter of thanks on your corporate letterhead
+  PO Box A1070, Sydney South 1235, New South Wales, Australia
+- Send me an Amazon.com gift certificate
+  feedback@benjaminjohnston.com.au
+- Consider contracting me for some Prolog work
+
+I can write up an invoice if this is necessary for your
+company's procedures.
+
+Thanks,
+    
+-Benjamin Johnston
+~                          
