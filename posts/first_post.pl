@@ -1,6 +1,6 @@
 :- style_check(-atom).
 
-post(1, 'Prolog Blog launches', '16 March 2009',
+post(1, 'Prolog Blog launches', 'Mon, 16 March 2009 01:47:00 EDT',
       '<p>Welcome to Prolog Blog, a site dedicated to Prolog news, tutorials and helping to connect the Prolog community. The site itself is written in Prolog and the source is available on GitHub. Visit the
       <a href=\'http://github.com/jdallien/prologblog\'>Prolog Blog GitHub repository</a>. The site is very simple for now but will be undergoing constant improvement. An RSS feed is coming soon.
       <p>Feedback, links, suggestions for posts or links to your own blog posts you would like to share are welcome. Please email 
