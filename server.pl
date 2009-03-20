@@ -6,27 +6,46 @@
  * http://jeff.dallien.net/ 
  * */
 
+:- ['psp_templating'].
 :- use_module(library('http/thread_httpd')).
 :- use_module(library('http/http_dispatch')).
 :- use_module(library('http/html_write')).
 
-:- multifile post/1.
+:- dynamic post/4.
+:- multifile post/4.
 
 server(Port) :-
         http_server(http_dispatch, [port(Port)]).
 
 :- http_handler('/', index, []).
-:- http_handler('/request', inspect, []).
+:- http_handler('/posts.rss', posts_rss, []).
+:- http_handler('/request', request, []).
 :- http_handler('/main.css', main_css, []).
 
 css(URL) -->
-  html_post(css,
-  link([ type('text/css'),
+  html(link([ type('text/css'),
          rel('stylesheet'),
          href(URL)
        ])).
 
+% TODO: shouldn't need to do this on every request 
+setup_templating :-
+  nb_setval(psp_headers, not_required),
+  nb_setval(psp_error, no).
+
+posts_rss(_Request) :-
+  setup_templating,
+  format('Content-type: text/xml~n~n', []),
+  format('<?xml version="1.0" encoding="UTF-8"?>', []),
+  run_page('posts.rss.prolog', []).
+
+
 index(_Request) :-
+  setup_templating,
+  format('Content-type: text/html~n~n', []),
+  run_page('posts.html.prolog', []).
+
+index2(_Request) :-
   all_posts(Posts),
   append([ 
            \css('main.css'),
@@ -44,7 +63,7 @@ all_posts(List) :-
   setof(Post, post(Post), TempList),
   flatten(TempList, List).
 
-post([h2('Congratulations'), p('You have correctly set up a Prolog Blog server.')]).
+post(1, 'Congratulations', '16 March 2009', '<p>You have correctly set up a Prolog Blog server.</p>').
 
 % can use this to force closing p tags
 % p(X) --> ['<p>'], X, ['</p>'].
@@ -63,4 +82,20 @@ request(Request) :-
   write(Request),
   format('</pre></body></html>').
 
+escape_html_tags(Text, Escaped) :-
+  atom_codes(Text, Codes),
+  replace(60, "&lt;", Codes, Escaped1),
+  replace(62, "&gt;", Escaped1, Escaped2),
+  flatten(Escaped2, EscapedCodes),
+  atom_codes(Escaped, EscapedCodes).
+
+post_escaped(A,B,C,EscapedBody) :-
+  post(A,B,C,Body),
+  escape_html_tags(Body,EscapedBody), !.
+
+replace(_,_,[],[]).
+replace(HReplacant,HReplacer,[HReplacant|Tail],[HReplacer|NewTail]):-
+  replace(HReplacant,HReplacer,Tail,NewTail).
+replace(HReplacant,HReplacer,[Head|Tail],[Head|NewTail]):-
+  replace(HReplacant,HReplacer,Tail,NewTail).
 
