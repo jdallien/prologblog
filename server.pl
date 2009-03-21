@@ -20,7 +20,6 @@ server(Port) :-
 :- http_handler('/', index, []).
 :- http_handler('/posts.rss', posts_rss, []).
 :- http_handler('/request', request, []).
-:- http_handler('/main.css', main_css, []).
 
 css(URL) -->
   html(link([ type('text/css'),
@@ -45,34 +44,10 @@ index(_Request) :-
   format('Content-type: text/html~n~n', []),
   run_page('posts.html.prolog', []).
 
-index2(_Request) :-
-  all_posts(Posts),
-  append([ 
-           \css('main.css'),
-           h1('Prolog Blog'),
-           div(class('tagline'), 'A blog about Prolog written in Prolog')
-         ],
-         Posts,
-         PageContent),
-  reply_html_page([ title('Prolog Blog'),
-                    \html_receive(css)
-                  ],
-                  PageContent).
-
-all_posts(List) :-
-  setof(Post, post(Post), TempList),
-  flatten(TempList, List).
-
 post(1, 'Congratulations', '16 March 2009', '<p>You have correctly set up a Prolog Blog server.</p>').
 
 % can use this to force closing p tags
 % p(X) --> ['<p>'], X, ['</p>'].
-
-main_css(_Request) :-
-  format('Content-type: text/css~n~n', []),
-  format('div.tagline {
-           font-size: small;
-          }').
 
 /* show the incoming request as a page */
 request(Request) :-
@@ -92,6 +67,8 @@ escape_html_tags(Text, Escaped) :-
 post_escaped(A,B,C,EscapedBody) :-
   post(A,B,C,Body),
   escape_html_tags(Body,EscapedBody), !.
+
+post_escaped(A,B,C,EscapedBody)
 
 replace(_,_,[],[]).
 replace(HReplacant,HReplacer,[HReplacant|Tail],[HReplacer|NewTail]):-
