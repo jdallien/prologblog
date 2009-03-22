@@ -68,8 +68,6 @@ post_escaped(A,B,C,EscapedBody) :-
   post(A,B,C,Body),
   escape_html_tags(Body,EscapedBody), !.
 
-post_escaped(A,B,C,EscapedBody)
-
 replace(_,_,[],[]).
 replace(HReplacant,HReplacer,[HReplacant|Tail],[HReplacer|NewTail]):-
   replace(HReplacant,HReplacer,Tail,NewTail).
