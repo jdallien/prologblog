@@ -20,7 +20,7 @@
 <?) ,?>
 
 <div class="footer">
-  <p>Copyright 2009 <a href=\'http://jeff.dallien.net/\'>Jeff Dallien</a></p>
+  <p>Copyright 2009 <a href="http://jeff.dallien.net/">Jeff Dallien</a></p>
 </div>
 </body>
 </html>
