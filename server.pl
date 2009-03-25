@@ -18,7 +18,7 @@
 server(Port) :-
         http_server(http_dispatch, [port(Port)]).
 
-:- http_handler('/', index, []).
+:- http_handler('/', index_page, []).
 :- http_handler('/post', single_post, []).
 :- http_handler('/posts.rss', posts_rss, []).
 :- http_handler('/request', request, []).
@@ -40,7 +40,7 @@ posts_rss(_Request) :-
   format('<?xml version="1.0" encoding="UTF-8"?>', []),
   run_page('views/posts.rss.prolog', []).
 
-index(_Request) :-
+index_page(_Request) :-
   setup_templating,
   format('Content-type: text/html~n~n', []),!,
   run_page('views/posts.html.prolog', []).
@@ -54,7 +54,7 @@ single_post(Request) :-
   run_page('views/post.html.prolog', ['Title'=Title, 'Id'=PostId, 'Date'=Date, 'Body'=Body]).
 
 single_post(Request) :-
-  index(Request).
+  index_page(Request).
 
 post(1, 'Congratulations', '16 March 2009', '<p>You have correctly set up a Prolog Blog server.</p>').
 
