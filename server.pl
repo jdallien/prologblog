@@ -10,6 +10,7 @@
 :- use_module(library('http/thread_httpd')).
 :- use_module(library('http/http_dispatch')).
 :- use_module(library('http/html_write')).
+:- use_module(library('http/http_parameters')).
 
 :- dynamic post/4.
 :- multifile post/4.
@@ -18,6 +19,7 @@ server(Port) :-
         http_server(http_dispatch, [port(Port)]).
 
 :- http_handler('/', index, []).
+:- http_handler('/post', single_post, []).
 :- http_handler('/posts.rss', posts_rss, []).
 :- http_handler('/request', request, []).
 
@@ -36,13 +38,23 @@ posts_rss(_Request) :-
   setup_templating,
   format('Content-type: text/xml~n~n', []),
   format('<?xml version="1.0" encoding="UTF-8"?>', []),
-  run_page('posts.rss.prolog', []).
-
+  run_page('views/posts.rss.prolog', []).
 
 index(_Request) :-
   setup_templating,
-  format('Content-type: text/html~n~n', []),
-  run_page('posts.html.prolog', []).
+  format('Content-type: text/html~n~n', []),!,
+  run_page('views/posts.html.prolog', []).
+
+single_post(Request) :-
+  http_parameters(Request, [id(Id, [optional(true)])]),
+  atom_number(Id, PostId),
+  post(PostId, Title, Date, Body),
+  setup_templating,
+  format('Content-type: text/html~n~n', []),!,
+  run_page('views/post.html.prolog', ['Title'=Title, 'Id'=PostId, 'Date'=Date, 'Body'=Body]).
+
+single_post(Request) :-
+  index(Request).
 
 post(1, 'Congratulations', '16 March 2009', '<p>You have correctly set up a Prolog Blog server.</p>').
 
@@ -54,7 +66,9 @@ request(Request) :-
   format('Content-type: text/html~n~n', []),
   format('<html><body>~n', []),
   format('<pre>', []),
+  http_parameters(Request, [id(Id, [optional(true)])]),
   write(Request),
+  write(Id),
   format('</pre></body></html>').
 
 escape_html_tags(Text, Escaped) :-

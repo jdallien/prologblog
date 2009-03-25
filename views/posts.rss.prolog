@@ -28,8 +28,8 @@ escape_posts([post(Id,Title,Date,Body)|Tail], TempList, EscapedPosts) :-
         <?= Body ?>
       </description>
       <pubDate><?= Date ?></pubDate>
-      <link>http://prologblog.com/posts?id=<?= Id ?></link>
-      <guid>http://prologblog.com/posts?id=<?= Id ?></guid>
+      <link>http://prologblog.com/post?id=<?= Id ?></link>
+      <guid>http://prologblog.com/post?id=<?= Id ?></guid>
     </item>
 
 <?) ,?>
